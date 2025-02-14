@@ -15,10 +15,7 @@ public:
             if (it != m_handlers.end()) handlers = it->second;
         }
         for (const auto& handler : handlers) {
-            try {
                 handler(event);
-            } catch (...) {
-                // 异常处理
             }
         }
     }
