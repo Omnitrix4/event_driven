@@ -1,3 +1,10 @@
+#pragma once
+#include <condition_variable>
+#include <memory>
+#include <mutex>
+#include <queue>
+#include "event.h"
+
 class EventQueue {
 public:
     void Push(std::unique_ptr<Event> event) {

@@ -1,3 +1,10 @@
+
+#pragma once
+#include "event.h"
+#include "event_queue.h"
+#include "event_dispatcher.h"
+#include "event_loop.h"
+
 class EventLoop {
 public:
     EventLoop(EventQueue& queue, EventDispatcher& dispatcher)

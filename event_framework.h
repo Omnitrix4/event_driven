@@ -1,3 +1,11 @@
+#pragma once
+#include <thread>
+#include "event.h"
+#include "event_queue.h"
+#include "event_dispatcher.h"
+#include "event_loop.h"
+
+
 class EventFramework {
 public:
     EventFramework() : m_loop(m_queue, m_dispatcher) {}

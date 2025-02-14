@@ -1,3 +1,7 @@
+#pragma once
+#include <functional>
+#include <memory>
+
 class EventDispatcher {
 public:
     using Handler = std::function<void(const Event&)>;
@@ -18,7 +22,6 @@ public:
                 handler(event);
             }
         }
-    }
 
 private:
     std::unordered_map<Event::Type, std::vector<Handler>> m_handlers;
