@@ -1,13 +1,13 @@
 #pragma once
 #include <thread>
+
 #include "event.h"
-#include "event_queue.h"
 #include "event_dispatcher.h"
 #include "event_loop.h"
-
+#include "event_queue.h"
 
 class EventFramework {
-public:
+   public:
     EventFramework() : m_loop(m_queue, m_dispatcher) {}
 
     void Start() {
@@ -19,11 +19,9 @@ public:
         if (m_thread.joinable()) m_thread.join();
     }
 
-    void PostEvent(std::unique_ptr<Event> event) {
-        m_queue.Push(std::move(event));
-    }
+    void PostEvent(std::unique_ptr<Event> event) { m_queue.Push(std::move(event)); }
 
-    template<typename T>
+    template <typename T>
     void RegisterHandler(std::function<void(const T&)> handler) {
         auto type = GetEventType<T>();
         m_dispatcher.RegisterHandler(type, [handler](const Event& e) {
@@ -32,7 +30,7 @@ public:
         });
     }
 
-private:
+   private:
     EventQueue m_queue;
     EventDispatcher m_dispatcher;
     EventLoop m_loop;

@@ -1,12 +1,12 @@
 
 #pragma once
 #include "event.h"
-#include "event_queue.h"
 #include "event_dispatcher.h"
 #include "event_loop.h"
+#include "event_queue.h"
 
 class EventLoop {
-public:
+   public:
     EventLoop(EventQueue& queue, EventDispatcher& dispatcher)
         : m_queue(queue), m_dispatcher(dispatcher) {}
 
@@ -18,7 +18,7 @@ public:
         }
     }
 
-private:
+   private:
     EventQueue& m_queue;
     EventDispatcher& m_dispatcher;
 };

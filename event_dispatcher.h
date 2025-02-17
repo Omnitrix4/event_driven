@@ -3,7 +3,7 @@
 #include <memory>
 
 class EventDispatcher {
-public:
+   public:
     using Handler = std::function<void(const Event&)>;
 
     void RegisterHandler(Event::Type type, Handler handler) {
@@ -19,11 +19,11 @@ public:
             if (it != m_handlers.end()) handlers = it->second;
         }
         for (const auto& handler : handlers) {
-                handler(event);
-            }
+            handler(event);
         }
+    }
 
-private:
+   private:
     std::unordered_map<Event::Type, std::vector<Handler>> m_handlers;
     std::mutex m_mutex;
 };
