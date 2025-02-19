@@ -23,8 +23,7 @@ class EventQueue {
         m_queue.pop();
         return event;
     }
-    void ClearAll()
-    {
+    void ClearAll() {
         std::lock_guard<std::mutex> lock(m_mutex);
         while (!m_queue.empty()) {
             m_queue.pop();
