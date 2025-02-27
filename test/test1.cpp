@@ -88,47 +88,47 @@ int main() {
     //                       << std::chrono::system_clock::now().time_since_epoch().count()
     //                       << std::endl;
 
-
     //         },
     //         10);
     // }
 
-        {
+    {
         // 实现100ms累计时长
         framework.RegisterHandler<TimerEvent>([](TimerEvent& e) {
             if (e.callback) e.callback();
-    // if(e.is_first){
-    //     e.timestamp = std::chrono::steady_clock::now(); // 初始化 timestamp 为当前时间
-    //     e.is_first = false;
-    //         std::cout << "处理CountTimerEvent, is_first" << std::endl;
+            // if(e.is_first){
+            //     e.timestamp = std::chrono::steady_clock::now(); // 初始化 timestamp 为当前时间
+            //     e.is_first = false;
+            //         std::cout << "处理CountTimerEvent, is_first" << std::endl;
 
-    // }
-    // else {
-
-    // 使用静态变量存储上一次函数调用的时间点
-    // 获取当前时间点
-    std::chrono::steady_clock::time_point currentTime = std::chrono::steady_clock::now();
-
-    // 计算时间差 (duration)
-    std::chrono::duration<double> timeDiff = currentTime - e.timestamp;
-
-    // 将时间差转换为毫秒 (ms)
-    auto timeDiffMs = std::chrono::duration_cast<std::chrono::milliseconds>(timeDiff).count();
-
-    // 更新 e.timestamp 为 currentTime，为下次调用做准备
-    e.timestamp = currentTime;
-
-    // 首次调用时，previousTime 未被初始化，时间差可能不准确。
-    // 为了避免首次调用返回很大的时间差（可能为负值），可以做个特殊处理。
-
-    if (timeDiffMs < 0 || timeDiffMs > 1000) {
-        timeDiffMs =  0; // 或者返回一个特定的值表示首次调用
-    }
-
-    std::cout << "timeDiffMs" << timeDiffMs << std::endl;
-    e.timer_count += timeDiffMs;
             // }
-std::cout << "Time difference: " << e.timer_count << " ms" << std::endl;
+            // else {
+
+            // 使用静态变量存储上一次函数调用的时间点
+            // 获取当前时间点
+            std::chrono::steady_clock::time_point currentTime = std::chrono::steady_clock::now();
+
+            // 计算时间差 (duration)
+            std::chrono::duration<double> timeDiff = currentTime - e.timestamp;
+
+            // 将时间差转换为毫秒 (ms)
+            auto timeDiffMs =
+                std::chrono::duration_cast<std::chrono::milliseconds>(timeDiff).count();
+
+            // 更新 e.timestamp 为 currentTime，为下次调用做准备
+            e.timestamp = currentTime;
+
+            // 首次调用时，previousTime 未被初始化，时间差可能不准确。
+            // 为了避免首次调用返回很大的时间差（可能为负值），可以做个特殊处理。
+
+            if (timeDiffMs < 0 || timeDiffMs > 1000) {
+                timeDiffMs = 0;  // 或者返回一个特定的值表示首次调用
+            }
+
+            std::cout << "timeDiffMs" << timeDiffMs << std::endl;
+            e.timer_count += timeDiffMs;
+            // }
+            std::cout << "Time difference: " << e.timer_count << " ms" << std::endl;
         });
         // std::cout << "TimerEvent data 1" << std::endl;
         // 注册定时任务（每10秒执行）

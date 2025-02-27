@@ -1,7 +1,7 @@
 #pragma once
 #include <functional>
-#include <memory>
 #include <iostream>
+#include <memory>
 
 class EventDispatcher {
    public:
@@ -17,11 +17,11 @@ class EventDispatcher {
         {
             std::lock_guard<std::mutex> lock(m_mutex);
             auto it = m_handlers.find(event.GetType());
-            if (it != m_handlers.end())
-            {handlers = it->second;
-            }
-            else {
-                std::cout << "EventDispatcher::Dispatch: no handler for event type " << event.GetType() << std::endl;
+            if (it != m_handlers.end()) {
+                handlers = it->second;
+            } else {
+                std::cout << "EventDispatcher::Dispatch: no handler for event type "
+                          << event.GetType() << std::endl;
             }
         }
         for (auto& handler : handlers) {
